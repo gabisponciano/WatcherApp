@@ -19,8 +19,13 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.watcherapp.ui.theme.background
 import com.example.watcherapp.ui.theme.redComponent
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -48,12 +54,22 @@ fun Screen(){
 }
 @Composable
 fun saveButton(){
+    val snackbarHostState= remember { SnackbarHostState()} //Depois colocar em ViewModel
+    val scope = rememberCoroutineScope() //Snackbar precisa de coroutine
+
     Box(modifier = Modifier
         .width(86.dp)
         .height(32.dp)
         .border(0.8.dp, color = Color.White, RoundedCornerShape(4.dp))
         .background(Color.Transparent)
         .clickable {
+            scope.launch {
+                snackbarHostState
+                    .showSnackbar("Salvo em Favoritos",
+                        withDismissAction = true,
+                        duration = SnackbarDuration.Long
+                        )
+            }
 
         },
         contentAlignment = Alignment.CenterStart
@@ -75,6 +91,10 @@ fun saveButton(){
             )
 
         }
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
 
     }
 }
