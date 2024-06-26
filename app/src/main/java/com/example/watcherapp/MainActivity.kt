@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.watcherapp.screens.descriptionScreen
 import com.example.watcherapp.screens.favScreen
 import com.example.watcherapp.screens.homeScreen
 import com.example.watcherapp.screens.movieScreen
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WatcherAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "home"){
+                NavHost(navController = navController, startDestination = "description"){
                     composable("home"){
                         homeScreen()
                     }
@@ -39,6 +40,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("favs"){
                         favScreen()
+                    }
+                    composable("description"){
+                        descriptionScreen()
                     }
                 }
 
