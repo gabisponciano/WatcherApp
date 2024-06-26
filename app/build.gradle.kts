@@ -59,6 +59,8 @@ dependencies {
     implementation ("com.google.accompanist:accompanist-coil:0.10.0")
     implementation ("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+
 
 
     implementation(libs.androidx.core.ktx)
@@ -69,6 +71,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.room.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
