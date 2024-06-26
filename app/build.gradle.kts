@@ -53,9 +53,7 @@ dependencies {
 
     //Dependencia do retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
     implementation ("androidx.navigation:navigation-compose:2.7.7")
-
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,4 +70,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //Dependencia do Player de video
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
 }
