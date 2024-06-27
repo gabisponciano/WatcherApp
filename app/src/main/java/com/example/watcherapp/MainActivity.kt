@@ -14,10 +14,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.watcherapp.components.VideoPlayer
+import com.example.watcherapp.screens.MovieShow
+import com.example.watcherapp.screens.Tv_Show
+import com.example.watcherapp.screens.descriptionScreen
 import com.example.watcherapp.screens.favScreen
 import com.example.watcherapp.screens.homeScreen
-import com.example.watcherapp.screens.movieScreen
-import com.example.watcherapp.screens.showsScreen
+
+
 import com.example.watcherapp.ui.theme.WatcherAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,18 +31,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             WatcherAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "home"){
+                NavHost(navController = navController, startDestination = "shows"){
                     composable("home"){
                         homeScreen()
                     }
                     composable("movies"){
-                        movieScreen()
+                        MovieShow()
                     }
                     composable("shows"){
-                        showsScreen()
+                        Tv_Show()
                     }
                     composable("favs"){
                         favScreen()
+                    }
+                    composable("description"){
+                        descriptionScreen()
+                    }
+                    composable("video"){
+                        VideoPlayer(idVideo = "8IhNq0ng-wk")
                     }
                 }
 
@@ -46,4 +56,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
 

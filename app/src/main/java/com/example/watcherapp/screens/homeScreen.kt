@@ -13,6 +13,7 @@ fun homeScreen(){
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background)){
+        Tv_Show()
 
     }
 }
