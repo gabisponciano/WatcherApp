@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
+import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
 import com.example.watcherapp.network.movie.MovieViewModel
@@ -65,6 +66,8 @@ fun tvShowScreen(shows: List<TvShow>){
         .background(background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center){
+
+
         LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
             items(shows){ tvshow ->
                 Card (

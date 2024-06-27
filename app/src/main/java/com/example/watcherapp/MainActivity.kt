@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WatcherAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "home"){
+                NavHost(navController = navController, startDestination = "shows"){
                     composable("home"){
                         homeScreen()
                     }

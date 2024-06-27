@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
-import com.example.watcherapp.components.HomeTopAppBar
+//import com.example.watcherapp.components.HomeTopAppBar
 import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
 import com.example.watcherapp.network.movie.MovieViewModel
