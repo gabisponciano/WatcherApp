@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.watcherapp.R
+import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.Screen
 import com.example.watcherapp.components.saveButton
 import com.example.watcherapp.components.trailerButton
@@ -33,6 +34,7 @@ import com.example.watcherapp.ui.theme.greenComponent
 
 @Composable
 fun descriptionScreen(){
+    MyNavigationDrawer()
     Column (modifier = Modifier
         .fillMaxSize()
         .paint(painterResource(R.drawable.movie)),
@@ -40,7 +42,8 @@ fun descriptionScreen(){
         verticalArrangement = Arrangement.Center
     ) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(

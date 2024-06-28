@@ -72,7 +72,7 @@ fun MyNavigationDrawer() {
                         titleContentColor = MaterialTheme.colorScheme.primary,
                     ),
                     title = {
-                        Image(painterResource(R.drawable.popcorn ) , contentDescription = null,
+                        Image(painterResource(R.drawable.popcorn) , contentDescription = null,
                             modifier = Modifier.size(46.dp)
                             )
 
@@ -107,8 +107,8 @@ fun MyNavigationDrawer() {
 @Preview
 @Composable
 fun PreviewTopBar(){
-    Column (modifier = Modifier.fillMaxSize()){
+
         MyNavigationDrawer()
-    }
+
 
 }
