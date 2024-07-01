@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.watcherapp.R
 import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.Screen
@@ -34,13 +35,14 @@ import com.example.watcherapp.ui.theme.greenComponent
 
 @Composable
 fun descriptionScreen(){
-    MyNavigationDrawer()
+
     Column (modifier = Modifier
         .fillMaxSize()
         .paint(painterResource(R.drawable.movie)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        MyNavigationDrawer(navController = rememberNavController())
         Box(
             modifier = Modifier
                 .fillMaxSize()

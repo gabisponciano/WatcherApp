@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.ui.theme.background
 
@@ -16,7 +17,7 @@ fun favScreen(){
         .fillMaxSize()
         .background(background))
     {
-        MyNavigationDrawer()
+        MyNavigationDrawer(navController = rememberNavController())
     }
 }
 

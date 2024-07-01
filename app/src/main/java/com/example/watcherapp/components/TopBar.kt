@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyNavigationDrawer() {
+fun MyNavigationDrawer(navController: NavController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -54,12 +54,12 @@ fun MyNavigationDrawer() {
                 NavigationDrawerItem(
                     label = { Text(text = "Filmes") },
                     selected = false,
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate("movies")}
                 )
                 NavigationDrawerItem(
                     label = { Text(text = "Séries") },
                     selected = false,
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate("shows") }
                 )
             }
         },
@@ -90,7 +90,7 @@ fun MyNavigationDrawer() {
                         }
                     },
                     actions = {
-                        IconButton(onClick = {  }) {
+                        IconButton(onClick = { navController.navigate("favs") }) {
                             Icon(Icons.Filled.Favorite, contentDescription = "Action Icon",
                                 tint = redComponent)
                         }
@@ -98,7 +98,7 @@ fun MyNavigationDrawer() {
                     scrollBehavior = scrollBehavior,
                 )
             },
-        ) { contentPadding ->
+        ) {
 
         }
     }
@@ -107,8 +107,8 @@ fun MyNavigationDrawer() {
 @Preview
 @Composable
 fun PreviewTopBar(){
-
-        MyNavigationDrawer()
+        val navController = rememberNavController()
+        MyNavigationDrawer(navController)
 
 
 }

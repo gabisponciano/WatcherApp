@@ -19,7 +19,7 @@ import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
 import com.example.watcherapp.screens.descriptionScreen
 import com.example.watcherapp.screens.favScreen
-import com.example.watcherapp.screens.homeScreen
+//import com.example.watcherapp.screens.homeScreen
 
 
 import com.example.watcherapp.ui.theme.WatcherAppTheme
@@ -31,9 +31,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             WatcherAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "shows"){
+                NavHost(navController = navController, startDestination = "description"){
                     composable("home"){
-                        homeScreen()
+                        //homeScreen()
                     }
                     composable("movies"){
                         MovieShow()
