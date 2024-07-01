@@ -19,6 +19,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +34,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.components.MyNavigationDrawer
+import com.example.watcherapp.components.Navegacao
 //import com.example.watcherapp.components.HomeTopAppBar
 import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
@@ -65,6 +70,10 @@ fun ErrorScreen() {
 
 @Composable
 fun movieScreen(movies: List<Movie>){
+
+    var id by remember { mutableStateOf("") }
+    if (id != "") { Navegacao(tipo = "descrition")}
+
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background),
@@ -84,7 +93,7 @@ fun movieScreen(movies: List<Movie>){
                             .height(270.dp)
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(5.dp))
-                            .clickable { }
+                            .clickable { id = movie.id.toString() }
 
                     ){
                         MovieItem(movie)
