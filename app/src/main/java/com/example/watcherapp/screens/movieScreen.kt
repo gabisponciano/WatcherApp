@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,8 +25,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
+import com.example.watcherapp.components.MyNavigationDrawer
 //import com.example.watcherapp.components.HomeTopAppBar
 import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
@@ -33,7 +38,7 @@ import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = androidx.lifecycle.viewmodel.compose.viewModel()){
+fun MovieShow(viewModel: MovieViewModel = androidx.lifecycle.viewmodel.compose.viewModel(), navController: NavHostController){
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
         is MovieUiState.Success -> movieScreen(movies = state.movies)
@@ -63,24 +68,31 @@ fun movieScreen(movies: List<Movie>){
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center){
-        LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
-            items(movies){ movie ->
-                Card (
-                    modifier = Modifier
-                        .padding(7.dp)
-                        .height(270.dp)
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(5.dp))
-                        .clickable { }
+        //horizontalAlignment = Alignment.CenterHorizontally,
+        //verticalArrangement = Arrangement.Center
+    ){
+        Box (modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+            contentAlignment = Alignment.TopCenter
+        ){
+            LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
+                items(movies){ movie ->
+                    Card (
+                        modifier = Modifier
+                            .padding(7.dp)
+                            .height(270.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(5.dp))
+                            .clickable { }
 
-                ){
-                    MovieItem(movie)
+                    ){
+                        MovieItem(movie)
+
+                    }
 
                 }
-
-            }
+        }
 
         }
     }
@@ -105,8 +117,8 @@ fun MovieItem(movie: Movie) {
 
 
 
-@Preview
-@Composable
-fun moviePreview(){
-    MovieShow()
-}
+//@Preview
+//@Composable
+//fun moviePreview(){
+//    MovieShow()
+//}

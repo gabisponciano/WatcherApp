@@ -34,7 +34,6 @@ import com.example.watcherapp.ui.theme.greenComponent
 
 @Composable
 fun descriptionScreen(){
-    MyNavigationDrawer()
     Column (modifier = Modifier
         .fillMaxSize()
         .paint(painterResource(R.drawable.movie)),

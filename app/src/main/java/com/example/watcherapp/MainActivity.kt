@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.VideoPlayer
 import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
@@ -30,27 +31,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WatcherAppTheme {
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "shows"){
-                    composable("home"){
-                        homeScreen()
-                    }
-                    composable("movies"){
-                        MovieShow()
-                    }
-                    composable("shows"){
-                        Tv_Show()
-                    }
-                    composable("favs"){
-                        favScreen()
-                    }
-                    composable("description"){
-                        descriptionScreen()
-                    }
-                    composable("video"){
-                        VideoPlayer(idVideo = "8IhNq0ng-wk")
-                    }
-                }
+                MyNavigationDrawer(navController = rememberNavController())
 
             }
         }
