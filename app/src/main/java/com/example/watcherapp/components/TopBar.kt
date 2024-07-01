@@ -115,7 +115,7 @@ fun MyNavigationDrawer(navController: NavHostController) {
                     homeScreen()
                 }
                 composable("movies"){
-                    MovieShow(navController = navController)
+                    MovieShow(navController)
                 }
                 composable("shows"){
                     Tv_Show()

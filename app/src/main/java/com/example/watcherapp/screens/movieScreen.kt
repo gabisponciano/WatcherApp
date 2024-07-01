@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -38,7 +39,7 @@ import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = androidx.lifecycle.viewmodel.compose.viewModel()){
+fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController:NavHostController){
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
         is MovieUiState.Success -> movieScreen(movies = state.movies)
