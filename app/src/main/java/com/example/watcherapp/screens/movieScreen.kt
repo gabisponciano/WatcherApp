@@ -19,18 +19,22 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.components.MyNavigationDrawer
+import com.example.watcherapp.components.Navegacao
 //import com.example.watcherapp.components.HomeTopAppBar
 import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
@@ -39,7 +43,7 @@ import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController:NavHostController){
+fun MovieShow(viewModel: MovieViewModel = androidx.lifecycle.viewmodel.compose.viewModel(), navController: NavHostController){
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
         is MovieUiState.Success -> movieScreen(movies = state.movies)
@@ -66,27 +70,38 @@ fun ErrorScreen() {
 
 @Composable
 fun movieScreen(movies: List<Movie>){
+
+    var id by remember { mutableStateOf("") }
+    if (id != "") { Navegacao(tipo = "descrition")}
+
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center){
-        LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
-            items(movies){ movie ->
-                Card (
-                    modifier = Modifier
-                        .padding(7.dp)
-                        .height(270.dp)
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(5.dp))
-                        .clickable { }
+        //horizontalAlignment = Alignment.CenterHorizontally,
+        //verticalArrangement = Arrangement.Center
+    ){
+        Box (modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+            contentAlignment = Alignment.TopCenter
+        ){
+            LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
+                items(movies){ movie ->
+                    Card (
+                        modifier = Modifier
+                            .padding(7.dp)
+                            .height(270.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(5.dp))
+                            .clickable { id = movie.id.toString() }
 
-                ){
-                    MovieItem(movie)
+                    ){
+                        MovieItem(movie)
+
+                    }
 
                 }
-
-            }
+        }
 
         }
     }
