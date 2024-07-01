@@ -105,8 +105,8 @@ fun MovieItem(movie: Movie) {
 
 
 
-@Preview
-@Composable
-fun moviePreview(){
-    MovieShow()
-}
+//@Preview
+//@Composable
+//fun moviePreview(){
+//    MovieShow()
+//}
