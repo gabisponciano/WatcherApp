@@ -1,5 +1,6 @@
 package com.example.watcherapp.network.tvShow
 
+import com.example.watcherapp.network.data.TvShow
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,16 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 
-data class TvShow(
-    val id: Int,
-    val name: String,
-    val first_air_date: String,
-    val overview: String,
-    val poster_path:String
-)
-{
-    val image_URLTv get () = "https://image.tmdb.org/t/p/w500$poster_path"
-}
+
 
 data class TvShowResponse(
     val results: List<TvShow>

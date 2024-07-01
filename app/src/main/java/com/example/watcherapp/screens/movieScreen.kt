@@ -29,21 +29,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.Navegacao
+import com.example.watcherapp.network.data.Movie
 //import com.example.watcherapp.components.HomeTopAppBar
-import com.example.watcherapp.network.movie.Movie
+//import com.example.watcherapp.network.movie.Movie
 import com.example.watcherapp.network.movie.MovieUiState
 import com.example.watcherapp.network.movie.MovieViewModel
 import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = androidx.lifecycle.viewmodel.compose.viewModel(), navController: NavHostController){
+fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController: NavHostController){
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
         is MovieUiState.Success -> movieScreen(movies = state.movies)

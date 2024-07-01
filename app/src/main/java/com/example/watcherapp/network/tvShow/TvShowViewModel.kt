@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.watcherapp.network.data.TvShow
 import kotlinx.coroutines.launch
 
 sealed interface TvShowUiState {

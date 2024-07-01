@@ -4,21 +4,22 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.watcherapp.screens.Media_Show
 import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
 import com.example.watcherapp.screens.descriptionScreen
 import com.example.watcherapp.screens.favScreen
-import com.example.watcherapp.screens.homeScreen
+
 
 @Composable
 fun Navegacao(tipo : String) {
     var destino = tipo
-    if (destino == "") { destino = "shows"}
+    if (destino == "") { destino = "home"}
 
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = destino){
         composable("home"){
-            homeScreen()
+            Media_Show()
         }
         composable("movies"){
             MovieShow(navController = navController)

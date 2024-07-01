@@ -1,4 +1,4 @@
-package com.example.watcherapp.network.converter
+package com.example.watcherapp.network.data
 
 data class allresults(
     val page: Int,

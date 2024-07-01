@@ -25,10 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.components.MyNavigationDrawer
-import com.example.watcherapp.network.movie.Movie
+import com.example.watcherapp.network.data.TvShow
+
 import com.example.watcherapp.network.movie.MovieUiState
 import com.example.watcherapp.network.movie.MovieViewModel
-import com.example.watcherapp.network.tvShow.TvShow
+
 import com.example.watcherapp.network.tvShow.TvShowUiState
 import com.example.watcherapp.network.tvShow.TvShowViewModel
 import com.example.watcherapp.ui.theme.background
@@ -93,7 +94,7 @@ fun tvShowScreen(shows: List<TvShow>){
 fun TvShowItem(tvshow: TvShow) {
     Column (horizontalAlignment = Alignment.CenterHorizontally){
         SubcomposeAsyncImage(
-            model = tvshow.image_URLTv,
+            model = tvshow.imageUrl,
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
