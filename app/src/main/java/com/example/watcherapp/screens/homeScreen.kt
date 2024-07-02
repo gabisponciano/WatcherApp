@@ -2,7 +2,6 @@ package com.example.watcherapp.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,20 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.network.Media.MediaUiState
 import com.example.watcherapp.network.Media.MediaViewModel
 import com.example.watcherapp.network.data.MediaItem
-import com.example.watcherapp.network.data.TvShow
-//import com.example.watcherapp.network.movie.Movie
-import com.example.watcherapp.network.movie.MovieUiState
-import com.example.watcherapp.network.movie.MovieViewModel
-//import com.example.watcherapp.network.tvShow.TvShow
-import com.example.watcherapp.network.tvShow.TvShowUiState
-import com.example.watcherapp.network.tvShow.TvShowViewModel
 import com.example.watcherapp.ui.theme.background
 
 @Composable

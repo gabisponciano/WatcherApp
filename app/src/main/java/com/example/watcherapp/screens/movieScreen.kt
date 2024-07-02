@@ -48,7 +48,7 @@ import com.example.watcherapp.ui.theme.background
 fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController: NavHostController){
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
-        is MovieUiState.Success -> movieScreen(movies = state.movies)
+        is MovieUiState.Success -> movieScreen(movies = state.movies, navController)
         is MovieUiState.Error -> ErrorScreen()
     }
 }
@@ -71,7 +71,7 @@ fun ErrorScreen() {
 
 
 @Composable
-fun movieScreen(movies: List<Movie>){
+fun movieScreen(movies: List<Movie>, navController: NavController){
 
     var id by remember { mutableStateOf("") }
     if (id != "") { Navegacao(tipo = "descrition")}
@@ -79,8 +79,6 @@ fun movieScreen(movies: List<Movie>){
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background),
-        //horizontalAlignment = Alignment.CenterHorizontally,
-        //verticalArrangement = Arrangement.Center
     ){
         Box (modifier = Modifier
             .fillMaxWidth()
@@ -95,7 +93,7 @@ fun movieScreen(movies: List<Movie>){
                             .height(270.dp)
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(5.dp))
-                            .clickable { id = movie.id.toString() }
+                            .clickable { navController.navigate("detailsmovie/${movie.id}")}
 
                     ){
                         MovieItem(movie)

@@ -28,3 +28,17 @@ data class TvShow(
 ) : MediaItem {
     override val imageUrl get() = "https://image.tmdb.org/t/p/w500$poster_path"
 }
+
+data class DetailsMovie(
+    val id: Int,
+    val imdbId: String,
+    val overview: String,
+    val popularity: Double,
+    val posterPath: String,
+    val releaseDate: String,
+    val revenue: Int,
+    val runtime: Int,
+    val status: String,
+    val tagline: String,
+    val title: String,
+)

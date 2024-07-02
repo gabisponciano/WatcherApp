@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,20 +20,33 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.watcherapp.R
-import com.example.watcherapp.components.MyNavigationDrawer
-import com.example.watcherapp.components.Screen
 import com.example.watcherapp.components.saveButton
 import com.example.watcherapp.components.trailerButton
-import com.example.watcherapp.ui.theme.background
+import com.example.watcherapp.network.data.DetailsMovie
+import com.example.watcherapp.network.description.MovieDescriptionUiState
+import com.example.watcherapp.network.description.MovieDescriptionViewModel
 import com.example.watcherapp.ui.theme.greenComponent
 
 @Composable
-fun descriptionScreen(navController: NavHostController){
+fun DetailsMovieShow(viewModel: MovieDescriptionViewModel = viewModel<MovieDescriptionViewModel>(), navController: NavHostController){
+    when (val state = viewModel.moviedescriptionUiState) {
+        is MovieDescriptionUiState.Loading -> LoadingScreen()
+        is MovieDescriptionUiState.Success -> descriptionScreen(moviedetails = state.movieDetails, navController)
+        is MovieDescriptionUiState.Error -> ErrorScreen()
+    }
+}
+
+
+@Composable
+fun descriptionScreen(
+    moviedetails:DetailsMovie,
+    navController: NavHostController
+){
     Column (modifier = Modifier
         .fillMaxSize()
         .paint(painterResource(R.drawable.movie)),
@@ -64,7 +76,7 @@ fun descriptionScreen(navController: NavHostController){
 
                 ) {
                     Text(
-                        text = "Escolha Perfeita",
+                        text = moviedetails.title,
                         fontSize = 42.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
@@ -72,7 +84,7 @@ fun descriptionScreen(navController: NavHostController){
                     )
                     Row(horizontalArrangement = Arrangement.SpaceBetween) {
                         Text(
-                            text = "2012",
+                            text = moviedetails.releaseDate,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Thin,
                             color = Color.White,
@@ -81,7 +93,7 @@ fun descriptionScreen(navController: NavHostController){
                         )
 
                         Text(
-                            text = "12.156",
+                            text = moviedetails.popularity.toString(),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = greenComponent,
@@ -98,7 +110,7 @@ fun descriptionScreen(navController: NavHostController){
                         )
 
                         Text(
-                            text = "112mim",
+                            text = moviedetails.runtime.toString(),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Thin,
                             color = Color.White,
@@ -114,14 +126,14 @@ fun descriptionScreen(navController: NavHostController){
                     ) {
                         Column {
                             Text(
-                                text = "Mostre seu valor!",
+                                text = moviedetails.tagline,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = "Obrigada a ir para a faculdade contra a vontade, a rebelde Beca não se interessa em participar de atividades extracurriculares, até surgir a oportunidade de ingressar no grupo musical Barden Bella e competir no Campeonato Regional de Música.",
+                                text = moviedetails.overview,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Normal,
                                 color = Color.White
