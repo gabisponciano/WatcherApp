@@ -60,9 +60,6 @@ fun Error_ScreenMedia() {
     }
 }
 
-
-
-
 @Composable
 fun mediaScreen(medias: List<MediaItem>){
         LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
@@ -74,14 +71,10 @@ fun mediaScreen(medias: List<MediaItem>){
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(5.dp))
                         .clickable { }
-
                 ){
                     mmItem(tvmedia)
-
                 }
-
             }
-
         }
     }
 
@@ -97,7 +90,6 @@ fun mmItem(tvmedia: MediaItem) {
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(3.dp))
                 .background(background)
-
         )
     }
 }

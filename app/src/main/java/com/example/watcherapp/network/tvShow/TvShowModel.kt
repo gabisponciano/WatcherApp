@@ -23,8 +23,7 @@ interface TvShowApiService{
 object RetrofitInstance {
     private const val BASE_URL = "https://api.themoviedb.org/3/"
 
-    private val loggingInterceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)

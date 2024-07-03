@@ -41,7 +41,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.watcherapp.R
 import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
-import com.example.watcherapp.screens.descriptionScreen
+import com.example.watcherapp.screens.descriptionMovieScreen
 import com.example.watcherapp.screens.favScreen
 import com.example.watcherapp.ui.theme.componentsBackground
 import com.example.watcherapp.ui.theme.redComponent

@@ -45,7 +45,10 @@ import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController: NavHostController){
+fun MovieShow(
+    viewModel: MovieViewModel = viewModel<MovieViewModel>(),
+    navController: NavHostController
+) {
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
         is MovieUiState.Success -> movieScreen(movies = state.movies)
@@ -67,51 +70,46 @@ fun ErrorScreen() {
     }
 }
 
-
-
-
 @Composable
-fun movieScreen(movies: List<Movie>){
+fun movieScreen(movies: List<Movie>) {
 
     var id by remember { mutableStateOf("") }
-    if (id != "") { Navegacao(tipo = "descrition")}
+    if (id != "") {
+        Navegacao(tipo = "detailsMovie",id)
+    }
 
-    Column (modifier = Modifier
-        .fillMaxSize()
-        .background(background),
-        //horizontalAlignment = Alignment.CenterHorizontally,
-        //verticalArrangement = Arrangement.Center
-    ){
-        Box (modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(background),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
             contentAlignment = Alignment.TopCenter
-        ){
-            LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
-                items(movies){ movie ->
-                    Card (
+        ) {
+            LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)) {
+                items(movies) { movie ->
+                    Card(
                         modifier = Modifier
                             .padding(7.dp)
                             .height(270.dp)
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(5.dp))
                             .clickable { id = movie.id.toString() }
-
-                    ){
+                    ) {
                         MovieItem(movie)
-
                     }
-
                 }
-        }
-
+            }
         }
     }
 }
 
 @Composable
 fun MovieItem(movie: Movie) {
-    Column (horizontalAlignment = Alignment.CenterHorizontally){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SubcomposeAsyncImage(
             model = movie.imageUrl,
             contentDescription = null,
@@ -125,7 +123,6 @@ fun MovieItem(movie: Movie) {
         )
     }
 }
-
 
 
 //@Preview

@@ -18,7 +18,7 @@ import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.VideoPlayer
 import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
-import com.example.watcherapp.screens.descriptionScreen
+import com.example.watcherapp.screens.descriptionMovieScreen
 import com.example.watcherapp.screens.favScreen
 
 

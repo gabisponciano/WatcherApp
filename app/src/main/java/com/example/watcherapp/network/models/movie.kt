@@ -14,5 +14,6 @@ data class movie(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
-    val vote_count: Int
+    val vote_count: Int,
+    val run_time: Int
 )
