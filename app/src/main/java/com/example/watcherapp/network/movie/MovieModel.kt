@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 
 data class MovieResponse(
@@ -18,6 +19,9 @@ interface MovieApiService {
     @GET("movie/popular?page=1")
     suspend fun getPopularMovies(): MovieResponse
 
+    @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZTY3MjU5M2JkYTE1MmJjM2YzNDRhYTMwZDFjZDg3NyIsIm5iZiI6MTcxOTQyNzUyOC41MTIyNDUsInN1YiI6IjY2NzljMjcyZDdmOTY1NTUwMDkwNTJkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XZ8_qRfkCNvxCnwdrT-xsWOFdhbEyj_aXcKinCD7GZ4")
+    @GET("movie/{movieId}")
+    suspend fun getMovieDetails(@Path("movieId") movieId:Int):MovieDetails
 
 
     object RetrofitInstance {
