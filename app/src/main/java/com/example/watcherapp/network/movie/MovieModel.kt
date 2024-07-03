@@ -1,5 +1,6 @@
 package com.example.watcherapp.network.movie
 
+import com.example.watcherapp.network.data.DetailsMovie
 import com.example.watcherapp.network.data.Movie
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
