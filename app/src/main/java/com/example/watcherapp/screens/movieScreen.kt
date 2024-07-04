@@ -37,21 +37,31 @@ import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.components.MyNavigationDrawer
 import com.example.watcherapp.components.Navegacao
 import com.example.watcherapp.network.data.Movie
+import com.example.watcherapp.network.data.MovieSerial
 //import com.example.watcherapp.components.HomeTopAppBar
 //import com.example.watcherapp.network.movie.Movie
-import com.example.watcherapp.network.movie.MovieUiState
-import com.example.watcherapp.network.movie.MovieViewModel
+import com.example.watcherapp.network.movie.MoviesUiState
+import com.example.watcherapp.network.movie.MoviesViewModel
 import com.example.watcherapp.ui.theme.background
 
 
 @Composable
-fun MovieShow(viewModel: MovieViewModel = viewModel<MovieViewModel>(), navController: NavHostController){
-    when (val state = viewModel.movieUiState) {
-        is MovieUiState.Loading -> LoadingScreen()
-        is MovieUiState.Success -> movieScreen(movies = state.movies)
-        is MovieUiState.Error -> ErrorScreen()
+fun MovieScreen(navController: NavController, moviesUiState: MoviesUiState, moviesViewModel: MoviesViewModel){
+    when (moviesUiState) {
+        is MoviesUiState.Loading -> LoadingScreen()
+        is MoviesUiState.Success -> MovieScreenShow(moviesViewModel ,navController)
+        is MoviesUiState.Error -> ErrorScreen()
     }
 }
+
+//@Composable
+//fun MovieShow(viewModel: MoviesUiState = viewModel<MoviesViewModel>(), navController: NavHostController){
+//    when (val state = viewModel.) {
+//        is MoviesUiState.Loading -> LoadingScreen()
+//        is MoviesUiState.Success -> movieScreen(movies = state.movies, navController)
+//        is MoviesUiState.Error -> ErrorScreen()
+//    }
+//}
 
 @Composable
 fun LoadingScreen() {
@@ -67,11 +77,11 @@ fun ErrorScreen() {
     }
 }
 
-
-
-
+//
+//
+//
 @Composable
-fun movieScreen(movies: List<Movie>){
+fun MovieScreenShow(moviesViewModel: MoviesViewModel, navController: NavController){
 
     var id by remember { mutableStateOf("") }
     if (id != "") { Navegacao(tipo = "descrition")}
@@ -79,8 +89,6 @@ fun movieScreen(movies: List<Movie>){
     Column (modifier = Modifier
         .fillMaxSize()
         .background(background),
-        //horizontalAlignment = Alignment.CenterHorizontally,
-        //verticalArrangement = Arrangement.Center
     ){
         Box (modifier = Modifier
             .fillMaxWidth()
@@ -88,14 +96,14 @@ fun movieScreen(movies: List<Movie>){
             contentAlignment = Alignment.TopCenter
         ){
             LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
-                items(movies){ movie ->
+                items(moviesViewModel.movieListResponse){ movie ->
                     Card (
                         modifier = Modifier
                             .padding(7.dp)
                             .height(270.dp)
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(5.dp))
-                            .clickable { id = movie.id.toString() }
+                            .clickable { navController.navigate("detailsmovie/${movie.id}")}
 
                     ){
                         MovieItem(movie)
@@ -103,17 +111,17 @@ fun movieScreen(movies: List<Movie>){
                     }
 
                 }
-        }
+            }
 
         }
     }
 }
 
 @Composable
-fun MovieItem(movie: Movie) {
+fun MovieItem(movie: MovieSerial) {
     Column (horizontalAlignment = Alignment.CenterHorizontally){
         SubcomposeAsyncImage(
-            model = movie.imageUrl,
+            model = movie.posterPath,
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
@@ -125,11 +133,3 @@ fun MovieItem(movie: Movie) {
         )
     }
 }
-
-
-
-//@Preview
-//@Composable
-//fun moviePreview(){
-//    MovieShow()
-//}

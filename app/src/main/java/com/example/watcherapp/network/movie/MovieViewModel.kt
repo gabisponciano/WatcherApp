@@ -6,30 +6,39 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.watcherapp.network.data.Movie
+import com.example.watcherapp.network.data.MovieSerial
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
-sealed interface MovieUiState {
-    object Loading : MovieUiState
-    data class Success(val movies: List<Movie>) : MovieUiState
-    object Error : MovieUiState
+sealed interface MoviesUiState {
+    data class Success(val result: List<MovieSerial>) : MoviesUiState
+    data object Error : MoviesUiState
+    data object Loading : MoviesUiState
 }
 
-class MovieViewModel : ViewModel() {
-    var movieUiState: MovieUiState by mutableStateOf(MovieUiState.Loading)
+class MoviesViewModel :ViewModel() {
+
+    var moviesUiState: MoviesUiState by mutableStateOf(MoviesUiState.Loading)
         private set
+    var movieListResponse: List<MovieSerial> by mutableStateOf(listOf())
 
     init {
-        getPopularMovies()
+        getMoreMedias(1)
     }
 
-    private fun getPopularMovies() {
+    fun getMoreMedias(page : Int) {
         viewModelScope.launch {
-            movieUiState = MovieUiState.Loading
-            try {
-                val response = MovieApiService.RetrofitInstance.apiService.getPopularMovies()
-                movieUiState = MovieUiState.Success(response.results)
-            } catch (e: Exception) {
-                movieUiState = MovieUiState.Error
+            //moviesUiState = MoviesUiState.Loading
+            moviesUiState = try {
+                val result = MovieApiService.RetrofitInstance.apiService.getPopularMovies(page)
+                movieListResponse = result.results
+                MoviesUiState.Success(result.results)
+
+            } catch (e: IOException) {
+                MoviesUiState.Error
+            } catch (e: HttpException) {
+                MoviesUiState.Error
             }
         }
     }

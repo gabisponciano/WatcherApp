@@ -1,6 +1,6 @@
 package com.example.watcherapp.network.data
 
-data class Result(
+data class Resultm(
     val adult: Boolean,
     val backdrop_path: String,
     val first_air_date: String,

@@ -33,7 +33,7 @@ class MediaViewModel : ViewModel(){
                 val shows = RetrofitInstance.apiService.getPopularTvShows().results
 
                 val combinedList = mutableListOf<MediaItem>()
-                combinedList.addAll(movies)
+                //combinedList.addAll(movies)
                 combinedList.addAll(shows)
 
                 mediaUiState = MediaUiState.Success(combinedList)
