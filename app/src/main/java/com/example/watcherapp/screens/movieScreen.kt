@@ -1,5 +1,6 @@
 package com.example.watcherapp.screens
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,11 +48,11 @@ import com.example.watcherapp.ui.theme.background
 @Composable
 fun MovieShow(
     viewModel: MovieViewModel = viewModel<MovieViewModel>(),
-    navController: NavHostController
+    navController: NavController
 ) {
     when (val state = viewModel.movieUiState) {
         is MovieUiState.Loading -> LoadingScreen()
-        is MovieUiState.Success -> movieScreen(movies = state.movies)
+        is MovieUiState.Success -> movieScreen(movies = state.movies, navController)
         is MovieUiState.Error -> ErrorScreen()
     }
 }
@@ -71,13 +72,7 @@ fun ErrorScreen() {
 }
 
 @Composable
-fun movieScreen(movies: List<Movie>) {
-
-    var id by remember { mutableStateOf("") }
-    if (id != "") {
-        Navegacao(tipo = "detailsMovie",id)
-    }
-
+fun movieScreen(movies: List<Movie>, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -97,9 +92,9 @@ fun movieScreen(movies: List<Movie>) {
                             .height(270.dp)
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(5.dp))
-                            .clickable { id = movie.id.toString() }
+
                     ) {
-                        MovieItem(movie)
+                        MovieItem(movie, navController)
                     }
                 }
             }
@@ -108,7 +103,7 @@ fun movieScreen(movies: List<Movie>) {
 }
 
 @Composable
-fun MovieItem(movie: Movie) {
+fun MovieItem(movie: Movie, navController: NavController) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SubcomposeAsyncImage(
             model = movie.imageUrl,
@@ -119,14 +114,9 @@ fun MovieItem(movie: Movie) {
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(3.dp))
                 .background(background)
-
+                .clickable {
+                    navController.navigate("details")
+                }
         )
     }
 }
-
-
-//@Preview
-//@Composable
-//fun moviePreview(){
-//    MovieShow()
-//}

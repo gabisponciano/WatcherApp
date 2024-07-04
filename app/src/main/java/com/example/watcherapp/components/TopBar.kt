@@ -39,6 +39,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.watcherapp.R
+import com.example.watcherapp.screens.DescriptionMovie_Show
+import com.example.watcherapp.screens.Media_Show
 import com.example.watcherapp.screens.MovieShow
 import com.example.watcherapp.screens.Tv_Show
 import com.example.watcherapp.screens.descriptionMovieScreen
@@ -126,7 +128,27 @@ fun MyNavigationDrawer(navController: NavHostController) {
                 )
             }
         ) { contentPadding ->
-            Navegacao(tipo)
+            val navController = rememberNavController()
+            NavHost(navController = navController, startDestination = "movies"){
+                composable("home"){
+                    Media_Show()
+                }
+                composable("movies"){
+                    MovieShow(navController = navController)
+                }
+                composable("shows"){
+                    Tv_Show()
+                }
+                composable("favs"){
+                    favScreen(navController = navController)
+                }
+                composable("details"){
+                    DescriptionMovie_Show("1022789",navController = navController)
+                }
+                composable("video"){
+                    VideoPlayer(idVideo = "8IhNq0ng-wk")
+                }
+            }
         }
     }
 }

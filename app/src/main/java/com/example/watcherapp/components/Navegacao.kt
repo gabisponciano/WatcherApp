@@ -1,10 +1,14 @@
 package com.example.watcherapp.components
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.watcherapp.screens.DescriptionMovie_Show
 import com.example.watcherapp.screens.Media_Show
 import com.example.watcherapp.screens.MovieShow
@@ -14,13 +18,10 @@ import com.example.watcherapp.screens.favScreen
 
 
 @Composable
-fun Navegacao(tipo : String, parametro: String? = "") {
-
-    var destino = tipo
-    if (destino == "") { destino = "home"}
+fun Navegacao(navController: NavHostController) {
 
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = destino){
+    NavHost(navController = navController, startDestination = "home"){
         composable("home"){
             Media_Show()
         }
@@ -33,28 +34,22 @@ fun Navegacao(tipo : String, parametro: String? = "") {
         composable("favs"){
             favScreen(navController = navController)
         }
-
-        composable("detailsMovie"){
-            if (parametro != null) {
-                DescriptionMovie_Show(navController = navController, parametro)
-            }
+        composable("details"){
+            DescriptionMovie_Show( "1022789", navController = navController)
         }
-
-    /*
-        composable("descriptionMovie/{id}"){
-            backStack
-            descriptionScreen(navController = navController)
-            navController,
-            backStackEntry.arguments?.getString("id") ?: parametro
-        }
-
-     */
-
-
-
-
         composable("video"){
+            Log.i("ABC", "video")
             VideoPlayer(idVideo = "8IhNq0ng-wk")
         }
     }
 }
+//        composable(
+//            route = "detailsMovie/{idMovie}",
+//            arguments = listOf(navArgument(("idMovie")) { type = NavType.StringType } )
+//        ){
+//            navBackStackEntry ->
+//            val id = navBackStackEntry.arguments?.getString(("idMovie"))
+//            if (id != null) {
+//                DescriptionMovie_Show(id, navController)
+//            }
+//        }

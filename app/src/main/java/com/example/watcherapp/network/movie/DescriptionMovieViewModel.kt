@@ -1,5 +1,6 @@
 package com.example.watcherapp.network.movie
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -18,7 +19,7 @@ class DescriptionMovieViewModel : ViewModel() {
     var descritpionMovieUiState: DescritionMovieUiState by mutableStateOf(DescritionMovieUiState.Loading)
         private set
 
-    //init { getMovieDetails() }
+    init { getMovieDetails("1022789") }
 
     private fun getMovieDetails(param:String) {
         viewModelScope.launch {
@@ -27,6 +28,7 @@ class DescriptionMovieViewModel : ViewModel() {
                 val response = DescritpionMovieApiService.RetrofitInstance.apiService.getMovieDetails(param)
                 descritpionMovieUiState = DescritionMovieUiState.Success(response)
             } catch (e: Exception) {
+
                 descritpionMovieUiState = DescritionMovieUiState.Error
             }
         }

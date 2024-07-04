@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.watcherapp.R
 import com.example.watcherapp.components.saveButton
@@ -36,10 +37,13 @@ import com.example.watcherapp.network.movie.DescritionMovieUiState
 import com.example.watcherapp.ui.theme.background
 import com.example.watcherapp.ui.theme.greenComponent
 
+
+
+
 @Composable
 fun DescriptionMovie_Show(
-    navController: NavHostController,
     parametro : String,
+    navController: NavHostController,
     viewModel: DescriptionMovieViewModel = viewModel<DescriptionMovieViewModel>()
 ){
     when (val state = viewModel.descritpionMovieUiState) {

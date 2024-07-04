@@ -35,7 +35,9 @@ import com.example.watcherapp.network.tvShow.TvShowViewModel
 import com.example.watcherapp.ui.theme.background
 
 @Composable
-fun Tv_Show(viewModel: TvShowViewModel = androidx.lifecycle.viewmodel.compose.viewModel()){
+fun Tv_Show(
+    viewModel: TvShowViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    ){
     when (val state = viewModel.tvshowUiState) {
         is TvShowUiState.Loading -> Loading_Screen()
         is TvShowUiState.Success -> tvShowScreen(shows = state.shows)
