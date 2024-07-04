@@ -84,7 +84,7 @@ fun ErrorScreen() {
 fun MovieScreenShow(moviesViewModel: MoviesViewModel, navController: NavController){
 
     var id by remember { mutableStateOf("") }
-    if (id != "") { Navegacao(tipo = "descrition")}
+    if (id != "") { Navegacao(tipo = "movies")}
 
     Column (modifier = Modifier
         .fillMaxSize()

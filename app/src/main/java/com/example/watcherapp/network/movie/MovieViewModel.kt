@@ -1,5 +1,6 @@
 package com.example.watcherapp.network.movie
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -32,10 +33,12 @@ class MoviesViewModel :ViewModel() {
             //moviesUiState = MoviesUiState.Loading
             moviesUiState = try {
                 val result = MovieApiService.RetrofitInstance.apiService.getPopularMovies(page)
+                Log.d("MoviesViewModel", "Filmes recebidos: ${result.results.size}")
                 movieListResponse = result.results
                 MoviesUiState.Success(result.results)
 
             } catch (e: IOException) {
+                Log.e("MoviesViewModel", "Erro ao carregar filmes", e)
                 MoviesUiState.Error
             } catch (e: HttpException) {
                 MoviesUiState.Error

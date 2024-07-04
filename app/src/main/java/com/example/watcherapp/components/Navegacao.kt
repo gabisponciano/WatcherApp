@@ -7,8 +7,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.watcherapp.network.models.movie
+import com.example.watcherapp.network.movie.MoviesUiState
 import com.example.watcherapp.network.movie.MoviesViewModel
+import com.example.watcherapp.screens.DetailsMovieShow
 import com.example.watcherapp.screens.Media_Show
+import com.example.watcherapp.screens.MovieScreen
 import com.example.watcherapp.screens.MovieScreenShow
 import com.example.watcherapp.screens.Tv_Show
 import com.example.watcherapp.screens.favScreen
@@ -26,7 +30,8 @@ fun Navegacao(tipo : String) {
         }
         composable("movies"){
             val moviesViewModel: MoviesViewModel = viewModel<MoviesViewModel>()
-            MovieScreenShow(moviesViewModel,navController = navController)
+            val moviesUiState = moviesViewModel.moviesUiState
+            MovieScreen(navController,moviesUiState, moviesViewModel )
         }
         composable("shows"){
             Tv_Show()
@@ -34,12 +39,12 @@ fun Navegacao(tipo : String) {
         composable("favs"){
             favScreen(navController = navController)
         }
-        composable("detailsmovie"){
+        composable("detailsmovie/{movieId}"){
             val moviesViewModel: MoviesViewModel = viewModel<MoviesViewModel>()
             val results =
                 navController.previousBackStackEntry?.savedStateHandle?.get<String>("moveId")
             if (results != null){
-                moviesViewModel.movieListResponse
+                DetailsMovieShow(navController)
 
             }
 
