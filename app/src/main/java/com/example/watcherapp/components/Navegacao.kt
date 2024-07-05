@@ -1,19 +1,17 @@
 package com.example.watcherapp.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.watcherapp.network.models.movie
-import com.example.watcherapp.network.movie.MoviesUiState
-import com.example.watcherapp.network.movie.MoviesViewModel
+import com.example.watcherapp.network.movie.MovieViewModel
 import com.example.watcherapp.screens.DetailsMovieShow
 import com.example.watcherapp.screens.Media_Show
 import com.example.watcherapp.screens.MovieScreen
-import com.example.watcherapp.screens.MovieScreenShow
 import com.example.watcherapp.screens.Tv_Show
 import com.example.watcherapp.screens.favScreen
 
@@ -29,9 +27,15 @@ fun Navegacao(tipo : String) {
             Media_Show()
         }
         composable("movies"){
-            val moviesViewModel: MoviesViewModel = viewModel<MoviesViewModel>()
-            val moviesUiState = moviesViewModel.moviesUiState
-            MovieScreen(navController,moviesUiState, moviesViewModel )
+            val movieViewModel: MovieViewModel = viewModel<MovieViewModel>()
+            val movieUiState = movieViewModel.moviesUiState
+            //MovieScreen(navController,moviesUiState, moviesViewModel )
+            MovieScreen(
+                innerPadding = 16.dp,
+                navController = navController,
+                movieViewModel = movieViewModel,
+                movieUiState = movieUiState
+            )
         }
         composable("shows"){
             Tv_Show()
@@ -40,7 +44,7 @@ fun Navegacao(tipo : String) {
             favScreen(navController = navController)
         }
         composable("detailsmovie/{movieId}"){
-            val moviesViewModel: MoviesViewModel = viewModel<MoviesViewModel>()
+            val moviesViewModel: MovieViewModel = viewModel<MovieViewModel>()
             val results =
                 navController.previousBackStackEntry?.savedStateHandle?.get<String>("moveId")
             if (results != null){

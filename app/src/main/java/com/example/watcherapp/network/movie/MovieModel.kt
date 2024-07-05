@@ -1,7 +1,6 @@
 package com.example.watcherapp.network.movie
 
-import com.example.watcherapp.network.data.DetailsMovie
-import com.example.watcherapp.network.data.Movie
+
 import com.example.watcherapp.network.data.MovieSerial
 import com.example.watcherapp.network.models.MoviesResponse
 import okhttp3.OkHttpClient
@@ -20,6 +19,7 @@ import retrofit2.http.Query
 //data class MovieDetailResponse(
 //    val result: DetailsMovie
 //)
+const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 
 interface MovieApiService {
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZTY3MjU5M2JkYTE1MmJjM2YzNDRhYTMwZDFjZDg3NyIsIm5iZiI6MTcxOTQyNzUyOC41MTIyNDUsInN1YiI6IjY2NzljMjcyZDdmOTY1NTUwMDkwNTJkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XZ8_qRfkCNvxCnwdrT-xsWOFdhbEyj_aXcKinCD7GZ4",
@@ -32,8 +32,8 @@ interface MovieApiService {
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZTY3MjU5M2JkYTE1MmJjM2YzNDRhYTMwZDFjZDg3NyIsIm5iZiI6MTcxOTQyNzUyOC41MTIyNDUsInN1YiI6IjY2NzljMjcyZDdmOTY1NTUwMDkwNTJkNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XZ8_qRfkCNvxCnwdrT-xsWOFdhbEyj_aXcKinCD7GZ4",
         "Accept:application/json"
     )
-    @GET("movie/{movieId}")
-    suspend fun getMovieDetails(@Path("movieId") movieId:String): MovieSerial
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(@Path("movie_id") movieId:String): MovieSerial
 
 
     object RetrofitInstance {

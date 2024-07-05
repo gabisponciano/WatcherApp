@@ -6,42 +6,46 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.watcherapp.network.data.Movie
-import com.example.watcherapp.network.data.MovieSerial
+
+import com.example.watcherapp.network.models.Moviee
+import com.example.watcherapp.network.models.MoviesResponse
+import com.example.watcherapp.network.tvShow.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-sealed interface MoviesUiState {
-    data class Success(val result: List<MovieSerial>) : MoviesUiState
-    data object Error : MoviesUiState
-    data object Loading : MoviesUiState
+sealed interface MovieUiState {
+    data class Success(val result: MoviesResponse) : MovieUiState
+    data object Error : MovieUiState
+    data object Loading : MovieUiState
+
 }
 
-class MoviesViewModel :ViewModel() {
+class MovieViewModel : ViewModel()  {
+    var mediaType = "movie"
 
-    var moviesUiState: MoviesUiState by mutableStateOf(MoviesUiState.Loading)
+    var movieListResponse : List<Moviee> by  mutableStateOf(listOf())
+
+    var moviesUiState: MovieUiState by mutableStateOf(MovieUiState.Loading)
         private set
-    var movieListResponse: List<MovieSerial> by mutableStateOf(listOf())
 
     init {
-        getMoreMedias(1)
+        getPopularMovies(1)
     }
 
-    fun getMoreMedias(page : Int) {
+    fun getPopularMovies(page : Int) {
         viewModelScope.launch {
             //moviesUiState = MoviesUiState.Loading
             moviesUiState = try {
-                val result = MovieApiService.RetrofitInstance.apiService.getPopularMovies(page)
-                Log.d("MoviesViewModel", "Filmes recebidos: ${result.results.size}")
+                val result =MovieApiService.RetrofitInstance.apiService.getPopularMovies(page)
+
                 movieListResponse = result.results
-                MoviesUiState.Success(result.results)
+                MovieUiState.Success(result)
 
             } catch (e: IOException) {
-                Log.e("MoviesViewModel", "Erro ao carregar filmes", e)
-                MoviesUiState.Error
+                MovieUiState.Error
             } catch (e: HttpException) {
-                MoviesUiState.Error
+                MovieUiState.Error
             }
         }
     }

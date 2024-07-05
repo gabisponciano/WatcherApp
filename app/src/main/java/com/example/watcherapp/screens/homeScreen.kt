@@ -2,6 +2,7 @@ package com.example.watcherapp.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -56,6 +57,11 @@ fun Error_ScreenMedia() {
 
 @Composable
 fun mediaScreen(medias: List<MediaItem>){
+    Column (modifier = Modifier
+        .fillMaxSize()
+        .background(background),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center){
         LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
             items(medias){ tvmedia ->
                 Card (
@@ -74,6 +80,8 @@ fun mediaScreen(medias: List<MediaItem>){
             }
 
         }
+    }
+
     }
 
 @Composable

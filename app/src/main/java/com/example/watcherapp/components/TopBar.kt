@@ -61,7 +61,7 @@ fun MyNavigationDrawer(navController: NavHostController) {
                     selected = false,
                     onClick = {
                         scope.launch { drawerState.close()}
-                        tipo = "movies"
+                        tipo = "home"
                     }
                 )
                 HorizontalDivider()

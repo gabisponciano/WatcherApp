@@ -9,19 +9,19 @@ interface MediaItem {
     val imageUrl: String
 }
 
-data class Movie(
-    override val id: Int,
-    val tittle: String,
-    val popularity: Double,
-    @SerializedName("release_date") val releaseDate: String,
-    val overview: String,
-    @SerializedName("poster_path") val posterPath: String,
-    override val name: String,
-    var runtime: Int,
-    val tagline: String
-) : MediaItem {
-    override val imageUrl get() = "https://image.tmdb.org/t/p/w500$posterPath"
-}
+//data class Movie(
+//    override val id: Int,
+//    val tittle: String,
+//    val popularity: Double,
+//    @SerializedName("release_date") val releaseDate: String,
+//    val overview: String,
+//    @SerializedName("poster_path") val posterPath: String,
+//    override val name: String,
+//    var runtime: Int,
+//    val tagline: String
+//) : MediaItem {
+//    override val imageUrl get() = "https://image.tmdb.org/t/p/w500$posterPath"
+//}
 //Ajeitar isso
 data class TvShow(
     override val id: Int,
@@ -32,20 +32,19 @@ data class TvShow(
 ) : MediaItem {
     override val imageUrl get() = "https://image.tmdb.org/t/p/w500$poster_path"
 }
-
-data class DetailsMovie(
-    val id: Int,
-    val imdbId: String,
-    val overview: String,
-    val popularity: Double,
-    val posterPath: String,
-    val releaseDate: String,
-    val revenue: Int,
-    val runtime: Int,
-    val status: String,
-    val tagline: String,
-    val title: String,
-)
+//data class DetailsMovie(
+//    val id: Int,
+//    val imdbId: String,
+//    val overview: String,
+//    val popularity: Double,
+//    val posterPath: String,
+//    val releaseDate: String,
+//    val revenue: Int,
+//    val runtime: Int,
+//    val status: String,
+//    val tagline: String,
+//    val title: String,
+//)
 
 
 

@@ -26,7 +26,7 @@ import androidx.navigation.NavHostController
 import com.example.watcherapp.R
 import com.example.watcherapp.components.saveButton
 import com.example.watcherapp.components.trailerButton
-import com.example.watcherapp.network.data.DetailsMovie
+
 import com.example.watcherapp.ui.theme.greenComponent
 
 @Composable
