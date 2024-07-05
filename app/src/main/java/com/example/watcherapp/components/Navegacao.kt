@@ -19,7 +19,7 @@ fun Navegacao(tipo : String) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = destino){
         composable("home"){
-            Media_Show()
+            Media_Show(navController = navController)
         }
         composable("movies"){
             MovieShow(navController = navController)

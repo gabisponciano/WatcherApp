@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
 import com.example.watcherapp.network.Media.MediaUiState
 import com.example.watcherapp.network.Media.MediaViewModel
@@ -38,7 +39,7 @@ import com.example.watcherapp.network.tvShow.TvShowViewModel
 import com.example.watcherapp.ui.theme.background
 
 @Composable
-fun Media_Show(viewModel: MediaViewModel = viewModel<MediaViewModel>()){
+fun Media_Show(viewModel: MediaViewModel = viewModel<MediaViewModel>(),navController: NavController){
     when (val state = viewModel.mediaUiState) {
         is MediaUiState.Loading -> Loading_ScreenMedia()
         is MediaUiState.Success -> mediaScreen(medias = state.medias)
@@ -65,6 +66,9 @@ fun Error_ScreenMedia() {
 
 @Composable
 fun mediaScreen(medias: List<MediaItem>){
+    Column (modifier = Modifier
+        .fillMaxSize()
+        .background(background),){
         LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 160.dp)){
             items(medias){ tvmedia ->
                 Card (
@@ -83,6 +87,9 @@ fun mediaScreen(medias: List<MediaItem>){
             }
 
         }
+
+    }
+
     }
 
 @Composable

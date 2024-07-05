@@ -74,7 +74,7 @@ fun ErrorScreen() {
 fun movieScreen(movies: List<Movie>){
 
     var id by remember { mutableStateOf("") }
-    if (id != "") { Navegacao(tipo = "descrition")}
+    if (id != "") { Navegacao(tipo = "movies")}
 
     Column (modifier = Modifier
         .fillMaxSize()
